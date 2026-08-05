@@ -10,19 +10,22 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+
 }
 
 .game-container{
+    width: 90vw;
+    max-width: 1200px;
     display: grid;
-    width: 640px;
-    height: 640px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 20px;
-    padding: 10px;
     perspective: 1000px;
 }
 
 .card{
+    width: 100%;
+    aspect-ratio: 2 / 3;
     border: 1px solid white;
     border-radius: 20px;
     position: relative;
