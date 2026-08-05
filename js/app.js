@@ -66,3 +66,8 @@ function handleGameOver() {
     }, 1000);
 }
 }
+
+allCards.forEach(card => {
+    let randomIndex = Math.floor(Math.random() * 12);
+    card.style.order = randomIndex;
+});
