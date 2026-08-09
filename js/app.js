@@ -1,4 +1,11 @@
 const allCards = document.querySelectorAll('.card');
+const startScreen = document.querySelector('#start-screen');
+const startButton = document.querySelector('#start-button');
+const timer = document.querySelector('#timer');
+
+let timeLeft = 30;
+let countdown;
+
 
 let firstCard = null;
 let secondCard = null;
@@ -11,6 +18,7 @@ allCards.forEach(card => {
     card.addEventListener('click', handleCardClick);
 });
 
+startButton.addEventListener("click", startGame);
 function handleCardClick() {
     if(!canClick) return;
 
@@ -58,8 +66,9 @@ secondCard = this;
     },1000);
 }
 function handleGameOver() {
+    clearInterval(countdown);
     setTimeout(() => {
-        let playAgain = confirm('Game Over! Do you want to play again?');
+        let playAgain = confirm('You Win! Play Again?');
         if(playAgain === true) {
         location.reload();
         }
@@ -71,3 +80,21 @@ allCards.forEach(card => {
     let randomIndex = Math.floor(Math.random() * 12);
     card.style.order = randomIndex;
 });
+
+function startGame() {
+    startScreen.style.display = 'none';
+
+    startTimer();
+}
+
+function startTimer() {
+    countdown = setInterval(() => {
+        timeLeft--;
+        timer.textContent = timeLeft;
+        if(timeLeft === 0) {
+            clearInterval(countdown);
+            alert('Time is up! Game Over!');
+            location.reload();
+        }
+    }, 1000);
+}
