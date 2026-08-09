@@ -10,14 +10,64 @@
 <body>
 
     <div id="start-screen">
+    <div class="start-box">
         <h1>Memory Card Game</h1>
         <p>Match all the cards before the time runs out!</p>
         <button id="start-button">Start Game</button>
     </div>
+</div>
 
-    <div id="timer">30 </div>
+<div id="win-screen">
 
-    <div class="game-container">
+    <div class="win-box">
+
+        <h1>You Win!</h1>
+
+        <p>All pairs matched!</p>
+
+        <div class="win-time">
+            <span>Your Time</span>
+            <span id="final-time">0</span>
+        </div>
+
+        <div class="win-time">
+            <span>Best Time</span>
+            <span id="final-best-time">0</span>
+        </div>
+
+        <button id="play-again-button">Play Again</button>
+
+    </div>
+
+</div>
+
+<div class="game-header">
+
+    <h2>Memory Card Game</h2>
+
+    <div class="game-info">
+
+        <div class="game-stat">
+            <span>TIME:</span>
+            <span id="timer">0</span>
+        </div>
+
+        <div class="game-stat">
+            <span>BEST:</span>
+            <span id="best-time">--</span>
+        </div>
+
+        <div class="game-stat">
+            <span>PAIRS:</span>
+            <span id="score">0 / 6</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="game-container">
+
     <div class="card">
         <img src="./assets/images/front1.png" alt="card front" class="front" />
         <img src="./assets/images/back.png" alt="card back" class="back" />
@@ -78,7 +128,7 @@
         <img src="./assets/images/back.png" alt="card back" class="back" />
     </div>
 
-    </div>
+</div>
 
 </body>
 </html>

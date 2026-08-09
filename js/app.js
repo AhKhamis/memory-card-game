@@ -1,10 +1,24 @@
 const allCards = document.querySelectorAll('.card');
 const startScreen = document.querySelector('#start-screen');
 const startButton = document.querySelector('#start-button');
-const timer = document.querySelector('#timer');
 
-let timeLeft = 30;
-let countdown;
+const winScreen = document.querySelector('#win-screen');
+const finalTime = document.querySelector('#final-time');
+const finalBestTime = document.querySelector('#final-best-time');
+const playAgainButton = document.querySelector('#play-again-button');
+
+const timer = document.querySelector('#timer');
+const bestTimeDisplay = document.querySelector('#best-time');
+const scoreDisplay = document.querySelector('#score');
+
+let time = 0;
+let timerInterval;
+
+let bestTime = localStorage.getItem("bestTime");
+
+if(bestTime !== null){
+    bestTimeDisplay.textContent = bestTime;
+}
 
 
 let firstCard = null;
@@ -19,6 +33,11 @@ allCards.forEach(card => {
 });
 
 startButton.addEventListener("click", startGame);
+
+playAgainButton.addEventListener("click", function(){
+    location.reload();
+});
+
 function handleCardClick() {
     if(!canClick) return;
 
@@ -44,11 +63,16 @@ secondCard = this;
     secondCard = null;
 
     score++;
+    scoreDisplay.textContent = score;
 
     if(score === 6){
-        handleGameOver();
 
+    if(bestTime === null || time < bestTime){
+        localStorage.setItem("bestTime", time);
     }
+
+    handleGameOver();
+}
     return;
 }
 
@@ -66,13 +90,13 @@ secondCard = this;
     },1000);
 }
 function handleGameOver() {
-    clearInterval(countdown);
-    setTimeout(() => {
-        let playAgain = confirm('You Win! Play Again?');
-        if(playAgain === true) {
-        location.reload();
-        }
-    }, 1000);
+
+    clearInterval(timerInterval);
+
+    finalTime.textContent = time;
+    finalBestTime.textContent = bestTime;
+
+    winScreen.style.display = 'flex';
 }
 }
 
@@ -88,13 +112,8 @@ function startGame() {
 }
 
 function startTimer() {
-    countdown = setInterval(() => {
-        timeLeft--;
-        timer.textContent = timeLeft;
-        if(timeLeft === 0) {
-            clearInterval(countdown);
-            alert('Time is up! Game Over!');
-            location.reload();
-        }
+    timerInterval = setInterval(() => {
+        time++;
+        timer.textContent = time;
     }, 1000);
 }
