@@ -11,6 +11,11 @@ const timer = document.querySelector('#timer');
 const bestTimeDisplay = document.querySelector('#best-time');
 const scoreDisplay = document.querySelector('#score');
 
+const flipSound = new Audio('./assets/sounds/flip.wav');
+const matchSound = new Audio('./assets/sounds/match.wav');
+const winSound = new Audio('./assets/sounds/win.wav');
+const backgroundMusic = new Audio('./assets/sounds/background.mp3');
+
 let time = 0;
 let timerInterval;
 
@@ -46,6 +51,9 @@ function handleCardClick() {
 
     this.classList.add('flip');
 
+    flipSound.currentTime = 0;
+    flipSound.play();
+
     if (!firstCard) {
   firstCard = this;
   return;
@@ -58,6 +66,9 @@ secondCard = this;
     const img2 = secondCard ? secondCard.firstElementChild.src : null;
 
     if(img1 === img2){
+
+    matchSound.currentTime = 0;
+    matchSound.play();
     
     firstCard = null;
     secondCard = null;
@@ -89,9 +100,15 @@ secondCard = this;
         canClick = true;
     },1000);
 }
+
 function handleGameOver() {
 
     clearInterval(timerInterval);
+
+    backgroundMusic.pause();
+
+    winSound.currentTime = 0;
+    winSound.play();
 
     finalTime.textContent = time;
     finalBestTime.textContent = bestTime;
@@ -107,6 +124,10 @@ allCards.forEach(card => {
 
 function startGame() {
     startScreen.style.display = 'none';
+
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = 0.2;
+    backgroundMusic.play();
 
     startTimer();
 }
