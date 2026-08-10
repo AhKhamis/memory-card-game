@@ -309,7 +309,7 @@ body{
     }
 
     .game-container{
-        width: 94vw;
+        width: 75vw;
 
         grid-template-columns: repeat(3, 1fr);
 
