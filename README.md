@@ -13,7 +13,7 @@ The goal is to match all 6 pairs as quickly as possible and beat your best time.
 - Best time tracking using localStorage
 - Win screen
 - Play again option
-- Card flip, match, wrong match, and win sound effects
+- Card flip, match, and win sound effects
 - Background music
 - Responsive layout
 
